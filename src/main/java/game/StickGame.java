@@ -6,6 +6,7 @@ public class StickGame {
     private int stickSize;
     private int pointSize;
     private int currentActiveStick;
+    private int currentOwnerCount;
     private boolean[] activeStickArray;
     private String[] namesOwnerArray;
 
@@ -14,6 +15,7 @@ public class StickGame {
         pointLength = stickLength + 1;
         stickSize = 2 * stickLength * pointLength;
         currentActiveStick = 0;
+        currentOwnerCount = 0;
         activeStickArray = new boolean[stickSize];
         namesOwnerArray = new String[stickLength * stickLength];
         pointSize = pointLength * pointLength;
@@ -25,7 +27,12 @@ public class StickGame {
         }
     }
 
-    protected int getStickNumber(int firstPointNumber, int secondPointNumber) {
+    private void setOwnerCell(int number, String playerName) {
+        namesOwnerArray[number] = playerName;
+        currentOwnerCount++;
+    }
+
+    public int getStickNumber(int firstPointNumber, int secondPointNumber) {
         if ((firstPointNumber > pointSize) || (secondPointNumber > pointSize))
             return -1;
         if ((firstPointNumber < 0) || (secondPointNumber < 0))
@@ -82,11 +89,11 @@ public class StickGame {
             int downCell = stickNumber;
             if (upCell >= 0) {
                 if (isClosed(upCell))
-                    namesOwnerArray[upCell] = playerName;
+                    setOwnerCell(upCell, playerName);
             }
             if (downCell < stickLength * stickLength) {
                 if (isClosed(downCell))
-                    namesOwnerArray[downCell] = playerName;
+                    setOwnerCell(downCell, playerName);
             }
         } else {
 
@@ -94,11 +101,11 @@ public class StickGame {
             int rightCell = getRightCell(stickNumber);
             if (leftCell != -1) {
                 if (isClosed(leftCell))
-                    namesOwnerArray[leftCell] = playerName;
+                    setOwnerCell(leftCell, playerName);
             }
             if (rightCell != -1) {
                 if (isClosed(rightCell))
-                    namesOwnerArray[rightCell] = playerName;
+                    setOwnerCell(rightCell, playerName);
             }
         }
 
@@ -111,10 +118,24 @@ public class StickGame {
     public void addStick(int firstPointNumber, int secondPointNumber, String playerName) {
         int stickNumber = getStickNumber(firstPointNumber, secondPointNumber);
         if (stickNumber != -1) {
-            if (!isClosed(stickNumber))
-                addStick(stickNumber);
-            addOwner(stickNumber,playerName);
+            addStick(stickNumber);
+            currentActiveStick++;
+            addOwner(stickNumber, playerName);
         }
+    }
+
+    public int getStickCount(){
+        return currentActiveStick;
+    }
+
+    public int getCurrentOwnerCount(){
+        return currentOwnerCount;
+    }
+
+    public boolean isEndGame(){
+        if(currentOwnerCount==stickLength*stickLength)
+            return true;
+        return false;
     }
 
 }

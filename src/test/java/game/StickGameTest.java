@@ -86,4 +86,18 @@ public class StickGameTest {
 
         Assert.assertEquals(actual,expected);
     }
+
+    @Test
+    public  void addStickTest1(){
+        StickGame stickGame = new StickGame(4);
+        stickGame.addStick(11, 12, null);
+        stickGame.addStick(11, 16, null);
+        stickGame.addStick(12, 17, null);
+        stickGame.addStick(16, 17, null);
+
+        int actual = stickGame.getCurrentOwnerCount();
+        int expected =1;
+
+        Assert.assertEquals(actual,expected);
+    }
 }
