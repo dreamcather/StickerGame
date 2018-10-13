@@ -138,4 +138,25 @@ public class StickGame {
         return false;
     }
 
+    public int getStart(int stickNumber){
+        if(stickNumber<stickLength*pointLength){
+            int row = stickNumber/stickLength;
+            int column =stickNumber%stickLength;
+            return pointLength*row+column;
+        }else {
+            int number = stickNumber-pointLength*stickLength;
+            int row = number%stickLength;
+            int column = number/stickLength;
+            return pointLength*row+column;
+
+        }
+    }
+
+    public int getEnd(int stickNumber){
+        int start = getStart(stickNumber);
+        if(stickNumber<stickLength*pointLength)
+            return start+1;
+        return start+pointLength;
+    }
+
 }

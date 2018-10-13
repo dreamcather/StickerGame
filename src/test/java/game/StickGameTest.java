@@ -68,27 +68,27 @@ public class StickGameTest {
     }
 
     @Test
-    public void getLeftCellTest1(){
+    public void getLeftCellTest1() {
         StickGame stickGame = new StickGame(4);
 
         int actual = stickGame.getLeftCell(30);
         int expected = 9;
 
-        Assert.assertEquals(actual,expected);
+        Assert.assertEquals(actual, expected);
     }
 
     @Test
-    public void getLeftCellTest2(){
+    public void getLeftCellTest2() {
         StickGame stickGame = new StickGame(4);
 
         int actual = stickGame.getLeftCell(25);
         int expected = 4;
 
-        Assert.assertEquals(actual,expected);
+        Assert.assertEquals(actual, expected);
     }
 
     @Test
-    public  void addStickTest1(){
+    public void addStickTest1() {
         StickGame stickGame = new StickGame(4);
         stickGame.addStick(11, 12, null);
         stickGame.addStick(11, 16, null);
@@ -96,7 +96,27 @@ public class StickGameTest {
         stickGame.addStick(16, 17, null);
 
         int actual = stickGame.getCurrentOwnerCount();
-        int expected =1;
+        int expected = 1;
+
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void getStartTest1(){
+        StickGame stickGame = new StickGame(4);
+
+        int actual = stickGame.getStart(14);
+        int expected = 17;
+
+        Assert.assertEquals(actual,expected);
+    }
+
+    @Test
+    public void getStartTest2(){
+        StickGame stickGame = new StickGame(4);
+
+        int actual = stickGame.getStart(37);
+        int expected = 9;
 
         Assert.assertEquals(actual,expected);
     }
