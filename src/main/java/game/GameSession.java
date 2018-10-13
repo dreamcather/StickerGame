@@ -26,10 +26,16 @@ public class GameSession {
             curentPlayer =firstPlayer;
     }
 
-    public void addStick(int firstPointNumber, int secondPointNumber, String name){
+    public boolean addStick(int firstPointNumber, int secondPointNumber, String name){
         if(isMyTurn(name)){
             stickGame.addStick(firstPointNumber,secondPointNumber,name);
             changeTurn();
+            return true;
         }
+        return false;
+    }
+
+    public boolean[] getStation(){
+        return stickGame.getEdges();
     }
 }

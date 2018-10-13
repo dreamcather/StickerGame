@@ -48,6 +48,7 @@ public class PointModel implements VisualObject {
 
     public void active(){
         source.setFill(Color.RED);
+        source.toFront();
     }
 
     public void disactive(){source.setFill(Color.BLACK);}

@@ -9,7 +9,6 @@ import javafx.scene.shape.Line;
 public class EdgeModel implements VisualObject {
     private Line source;
     private Color color;
-    private int number;
 
     public EdgeModel(Point2D start, Point2D end, double width, Pane pane) {
         source = new Line(start.getX(), start.getY(), end.getX(), end.getY());

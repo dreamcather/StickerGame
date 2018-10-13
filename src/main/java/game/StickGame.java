@@ -159,4 +159,8 @@ public class StickGame {
         return start+pointLength;
     }
 
+    public boolean[] getEdges(){
+        return activeStickArray;
+    }
+
 }

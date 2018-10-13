@@ -1,5 +1,6 @@
 package server;
 
+import game.GameSession;
 import game.StickGame;
 
 import java.rmi.RemoteException;
@@ -8,12 +9,12 @@ import java.util.ArrayList;
 
 public class BridgeClass extends UnicastRemoteObject implements Bridge {
 
-    private StickGame stickGame;
+    private GameSession gameSession;
     String firstPlayer;
     String secondPlayer;
 
     protected BridgeClass() throws RemoteException {
-        stickGame = new StickGame(4);
+        gameSession = new GameSession(4,"first","second");
     }
 
     public String getName() throws RemoteException {
@@ -24,4 +25,14 @@ public class BridgeClass extends UnicastRemoteObject implements Bridge {
         secondPlayer = "second";
         return secondPlayer;
     }
+
+    public boolean turn(int start, int second, String name) throws RemoteException {
+        return gameSession.addStick(start,second,name);
+    }
+
+    public boolean[] getState() throws RemoteException {
+        return gameSession.getStation();
+    }
+
+
 }

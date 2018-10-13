@@ -1,5 +1,6 @@
 package visualGame;
 
+import client.Client;
 import game.StickGame;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
@@ -21,8 +22,10 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
     StickGame stickGame;
     private int firstClickedPoint = -1;
     private int secondClickedPoint = -1;
+    private Client client;
+    private int curentEdgeCount;
 
-    public VisualStickGame(int xStart, int yStart, int width, int height, int squareCount, Pane anchorPane) {
+    public VisualStickGame(int xStart, int yStart, int width, int height, int squareCount, Pane anchorPane,Client client) {
         this.xStart = xStart;
         this.yStart = yStart;
         pointLength = squareCount + 1;
@@ -44,6 +47,10 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
             edgesArray[i] = new EdgeModel(pointArray[stickGame.getStart(i)].getCenter(),
                     pointArray[stickGame.getEnd(i)].getCenter(),fieldWidth/10,anchorPane);
         }
+        this.client =client;
+        curentEdgeCount=0;
+        RefreshLoop refreshLoop = new RefreshLoop(this,client);
+        refreshLoop.start();
     }
 
     private Point2D getPointCoordinate(int number){
@@ -86,7 +93,12 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
                         secondClickedPoint = res;
                         active(res);
                         if (stickGame.getStickNumber(firstClickedPoint, secondClickedPoint) != -1) {
-                            addEdge(firstClickedPoint, secondClickedPoint);
+                            if(client.turn(firstClickedPoint,secondClickedPoint)) {
+                                addEdge(firstClickedPoint, secondClickedPoint);
+                                curentEdgeCount++;
+                            }
+                            disactive(firstClickedPoint);
+                            disactive(secondClickedPoint);
                             firstClickedPoint = -1;
                             secondClickedPoint = -1;
                         }
@@ -98,14 +110,31 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
     }
 
     public void active(int number) {
+        pointArray[number].active();
     }
 
     public void disactive(int number) {
+        pointArray[number].disactive();
     }
 
     @Override
     public void handle(MouseEvent event) {
         Point2D point2D = new Point2D(event.getSceneX(), event.getSceneY());
         findClickedPoint(point2D);
+    }
+
+    public void refresh(boolean[] state){
+        boolean [] array = stickGame.getEdges();
+        for(int i=0;i<state.length;i++){
+            if((state[i])&&(!array[i])){
+                int start = stickGame.getStart(i);
+                int end = stickGame.getEnd(i);
+                addEdge(start,end);
+            }
+        }
+    }
+
+    public int getCurentEdgeCount(){
+        return curentEdgeCount;
     }
 }
