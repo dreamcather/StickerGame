@@ -1,5 +1,4 @@
 package server;
-import game.StickGame;
 
 import java.io.IOException;
 import java.rmi.AlreadyBoundException;

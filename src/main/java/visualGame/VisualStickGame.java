@@ -1,6 +1,7 @@
 package visualGame;
 
 import client.Client;
+import client.RefreshLoop;
 import game.StickGame;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;

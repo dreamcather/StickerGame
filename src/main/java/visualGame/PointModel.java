@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 
-public class PointModel implements VisualObject {
+public class PointModel implements VisualObject  {
     private Circle source;
     private boolean marked;
     private int number;

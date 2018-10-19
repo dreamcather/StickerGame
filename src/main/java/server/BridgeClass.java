@@ -1,11 +1,9 @@
 package server;
 
 import game.GameSession;
-import game.StickGame;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
 
 public class BridgeClass extends UnicastRemoteObject implements Bridge {
 

@@ -1,6 +1,6 @@
-package visualGame;
+package client;
 
-import client.Client;
+import visualGame.VisualStickGame;
 
 public class RefreshLoop extends Thread{
     VisualStickGame visualStickGame;
@@ -9,6 +9,7 @@ public class RefreshLoop extends Thread{
     public RefreshLoop(VisualStickGame visualStickGame, Client client) {
         this.visualStickGame = visualStickGame;
         this.client = client;
+        this.setDaemon(true);
     }
 
     @Override
