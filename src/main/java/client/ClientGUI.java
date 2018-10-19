@@ -14,6 +14,8 @@ public class  ClientGUI extends Application {
     private Stage window;
     private Scene scene;
     private Pane layout;
+    private NameRegistration nameRegistration;
+    private Comunication comunication;
     private VisualStickGame visualStickGame;
     private Client client;
 
@@ -27,9 +29,10 @@ public class  ClientGUI extends Application {
         client = new Client(bridge);
         scene = new Scene(layout, 750, 600);
         window.setScene(scene);
+        nameRegistration = new NameRegistration(layout,client);
         //visualStickGame = new VisualStickGame(50, 50, 400, 400, 4, layout,client);
         //visualStickGame.show();
-        scene.setOnMouseClicked(visualStickGame::handle);
+        //scene.setOnMouseClicked(visualStickGame::handle);
         window.show();
     }
 }
