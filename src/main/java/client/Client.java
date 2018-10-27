@@ -2,14 +2,22 @@ package client;
 
 import server.Bridge;
 
+import java.net.MalformedURLException;
+import java.rmi.AlreadyBoundException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 public class Client {
     String name;
     Bridge bridge;
+    CallBack callBack;
 
-    public Client(Bridge bridge) {
+    public Client(Bridge bridge) throws RemoteException, MalformedURLException {
         this.bridge = bridge;
+        callBack = new CallBackClass();
+        Naming.rebind("Client",callBack);
         try {
             name = bridge.getName();
             System.out.println(name);
