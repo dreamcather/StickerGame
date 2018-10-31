@@ -65,4 +65,26 @@ public class Client {
         }
         return res;
     }
+
+    public String[] getOwner(){
+        try {
+            return bridge.getOwner();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCurrentEdgeCount(){
+        try {
+            return bridge.getCurentEdgeCount();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
 }

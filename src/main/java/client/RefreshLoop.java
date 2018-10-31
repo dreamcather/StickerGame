@@ -17,8 +17,9 @@ public class RefreshLoop extends Thread{
         while (true){
             try {
                 sleep(1000);
-                if(visualStickGame.getCurentEdgeCount()!=client.getStation().length)
-                visualStickGame.refresh(client.getStation());
+                if(visualStickGame.getCurentEdgeCount()!=client.getCurrentEdgeCount()) {
+                    visualStickGame.refresh(client.getStation());
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

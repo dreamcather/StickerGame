@@ -17,7 +17,7 @@ public class BridgeClass extends UnicastRemoteObject implements Bridge {
     protected BridgeClass() throws RemoteException {
         accounts = new ArrayList<>();
         mails = new ArrayList<>();
-        //gameSession = new GameSession(4,"first","second");
+        gameSession = new GameSession(4,"first","second");
     }
 
     public int addName(String name) throws RemoteException {
@@ -54,6 +54,21 @@ public class BridgeClass extends UnicastRemoteObject implements Bridge {
 
     public boolean[] getState() throws RemoteException {
         return gameSession.getStation();
+    }
+
+    @Override
+    public String[] getOwner() throws RemoteException {
+        return gameSession.getOwner();
+    }
+
+    @Override
+    public int getOwnerCount() throws RemoteException {
+        return gameSession.getOwnerCount();
+    }
+
+    @Override
+    public int getCurentEdgeCount() throws RemoteException {
+        return gameSession.getCurrentEdgeCount();
     }
 
 

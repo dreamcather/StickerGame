@@ -18,6 +18,7 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
     private GameBackground sceneBackground;
     private GameBorder sceneBorder;
     private PointModel[] pointArray;
+    private PointModel[] ownerMark;
     private EdgeModel[] edgesArray;
     private Pane anchorPane;
     StickGame stickGame;
@@ -40,6 +41,11 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
         sceneBorder = new GameBorder(xStart, yStart, width, height, borderWidth, anchorPane);
 
         pointArray = new PointModel[pointLength*pointLength];
+        ownerMark = new PointModel[squareCount*squareCount];
+        for(int i=0;i<squareCount*squareCount;i++){
+            ownerMark[i] = new PointModel(getPointCoordinateShift(i),(int)fieldWidth/10,anchorPane,pointLength*pointLength+i);
+            ownerMark[i].hide();
+        }
         for(int i = 0;i<pointLength*pointLength;i++){
             pointArray[i] = new PointModel(getPointCoordinate(i),(int)fieldWidth/5,anchorPane,i);
         }
@@ -62,8 +68,19 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
         return new Point2D(x,y);
     }
 
+    private Point2D getPointCoordinateShift(int number){
+        Point2D point2D = getPointCoordinate(stickGame.getLeftUpPoint(number));
+        Point2D otherPoint=new Point2D(point2D.getX()+fieldWidth/2,point2D.getY()+fieldWidth/2);
+        return otherPoint;
+    }
+
     public void addEdge(int first, int second) {
         int stickNumber = stickGame.getStickNumber(first, second);
+        edgesArray[stickNumber].show();
+    }
+    public void addEdgeNoMY(int first, int second) {
+        int stickNumber = stickGame.getStickNumber(first, second);
+        stickGame.addStick(first,second,"NoMy");
         edgesArray[stickNumber].show();
     }
 
@@ -118,6 +135,17 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
         pointArray[number].disactive();
     }
 
+    public void addNoMy(int number){
+        ownerMark[number].show();
+        ownerMark[number].disactive();
+
+    }
+    public void addMy(int number){
+        ownerMark[number].show();
+        ownerMark[number].active();
+
+    }
+
     @Override
     public void handle(MouseEvent event) {
         Point2D point2D = new Point2D(event.getSceneX(), event.getSceneY());
@@ -133,6 +161,28 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
                 addEdge(start,end);
             }
         }
+        refreshOwner();
+    }
+
+    public void refreshOwner(){
+        String[] currentOwner = client.getOwner();
+        for(int i=0;i<currentOwner.length;i++) {
+            System.out.print(currentOwner[i]+"   ");
+        }
+        System.out.println();
+        for(int i=0;i<currentOwner.length;i++) {
+            if (currentOwner[i] != null) {
+                if (currentOwner.equals(client.getName())) {
+                    addMy(i);
+                } else {
+                    addNoMy(i);
+                }
+            }
+        }
+    }
+
+    public StickGame getStickGame() {
+        return stickGame;
     }
 
     public int getCurentEdgeCount(){

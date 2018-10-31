@@ -19,6 +19,10 @@ public class  ClientGUI extends Application {
     private VisualStickGame visualStickGame;
     private Client client;
 
+    public void addCommunication(){
+        comunication = new Comunication(layout,client);
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
@@ -29,10 +33,10 @@ public class  ClientGUI extends Application {
         client = new Client(bridge);
         scene = new Scene(layout, 750, 600);
         window.setScene(scene);
-        nameRegistration = new NameRegistration(layout,client);
-        //visualStickGame = new VisualStickGame(50, 50, 400, 400, 4, layout,client);
-        //visualStickGame.show();
-        //scene.setOnMouseClicked(visualStickGame::handle);
+        //nameRegistration = new NameRegistration(layout,client,this);
+        visualStickGame = new VisualStickGame(50, 50, 400, 400, 4, layout,client);
+        visualStickGame.show();
+        scene.setOnMouseClicked(visualStickGame::handle);
         window.show();
     }
 }

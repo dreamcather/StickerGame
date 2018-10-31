@@ -18,4 +18,10 @@ public interface Bridge extends Remote {
     boolean turn(int start, int second, String name) throws RemoteException;
 
     boolean[] getState() throws RemoteException;
+
+    String[] getOwner() throws RemoteException;
+
+    int getOwnerCount() throws RemoteException;
+
+    int getCurentEdgeCount() throws RemoteException;
 }

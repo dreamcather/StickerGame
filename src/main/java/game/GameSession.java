@@ -28,8 +28,12 @@ public class GameSession {
 
     public boolean addStick(int firstPointNumber, int secondPointNumber, String name){
         if(isMyTurn(name)){
+            int start =stickGame.getClossedCellCount();
             stickGame.addStick(firstPointNumber,secondPointNumber,name);
-            changeTurn();
+            int end = stickGame.getClossedCellCount();
+            if(start==end) {
+                changeTurn();
+            }
             return true;
         }
         return false;
@@ -37,5 +41,17 @@ public class GameSession {
 
     public boolean[] getStation(){
         return stickGame.getEdges();
+    }
+
+    public String[] getOwner(){
+        return stickGame.getNamesOwnerArray();
+    }
+
+    public int getOwnerCount(){
+        return stickGame.getCurrentOwnerCount();
+    }
+
+    public int getCurrentEdgeCount(){
+        return stickGame.getCurrentActiveStick();
     }
 }

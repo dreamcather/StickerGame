@@ -40,6 +40,13 @@ public class Comunication extends Thread {
         setGame.setLayoutX(200);
         setGame.setLayoutY(270);
         setGame.setText("Бросить вызов");
+        pane.getChildren().add(messageBox);
+        ArrayList<String> res = client.getNameList();
+        ObservableList<String> names = FXCollections.observableArrayList(res);
+        comboBox.setItems(names);
+        pane.getChildren().add(comboBox);
+        pane.getChildren().add(messageRider);
+        pane.getChildren().add(setGame);
         comboBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

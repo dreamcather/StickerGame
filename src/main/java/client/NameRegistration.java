@@ -25,6 +25,7 @@ public class NameRegistration {
     Image allright;
     Image trouble;
     Button accept;
+    ClientGUI clientGUI;
 
     private void nameLabelGeneration() {
         enterName = new Label("Введите имя");
@@ -67,9 +68,10 @@ public class NameRegistration {
         pane.getChildren().add(accept);
     }
 
-    public NameRegistration(Pane pane, Client client) throws FileNotFoundException {
+    public NameRegistration(Pane pane, Client client,ClientGUI clientGUI) throws FileNotFoundException {
         this.pane = pane;
         this.client = client;
+        this.clientGUI =clientGUI;
         allright = new Image(new FileInputStream("src/main/recources/thumb-up.png"));
         trouble = new Image(new FileInputStream("src/main/recources/thumb-down.png"));
         nameLabelGeneration();
@@ -84,6 +86,7 @@ public class NameRegistration {
                 if (!client.isExist(nameField.getText())) {
                     client.addName(nameField.getText());
                     hide();
+                    clientGUI.addCommunication();
                 }
             }
         });

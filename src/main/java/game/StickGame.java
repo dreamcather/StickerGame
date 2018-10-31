@@ -19,6 +19,7 @@ public class StickGame {
         activeStickArray = new boolean[stickSize];
         namesOwnerArray = new String[stickLength * stickLength];
         pointSize = pointLength * pointLength;
+
     }
 
     private void addStick(int number) {
@@ -163,4 +164,19 @@ public class StickGame {
         return activeStickArray;
     }
 
+    public int getClossedCellCount(){
+        return currentOwnerCount;
+    }
+
+    public String[] getNamesOwnerArray() {
+        return namesOwnerArray;
+    }
+
+    public int getLeftUpPoint(int number){
+        return getStart(number);
+    }
+
+    public int getCurrentActiveStick() {
+        return currentActiveStick;
+    }
 }
