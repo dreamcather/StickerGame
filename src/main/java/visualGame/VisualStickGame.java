@@ -24,7 +24,6 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
     private GameConverter gameConverter;
     private int firstClickedPoint = -1;
     private int secondClickedPoint = -1;
-    private StickGame stickGame;
     private Client client;
     private int curentEdgeCount;
 
@@ -35,7 +34,6 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
         stickLength = squareCount;
         fieldWidth = width / (pointLength + 1);
         this.anchorPane = anchorPane;
-        stickGame =new StickGame(squareCount,null);
         gameConverter =new GameConverter(stickLength);
         sceneBackground = new GameBackground(xStart + borderWidth, yStart + borderWidth,
                 width - borderWidth, height - borderWidth, anchorPane);
@@ -54,8 +52,8 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
         }
         edgesArray = new EdgeModel[2 * stickLength * pointLength];
         for (int i = 0; i < 2 * stickLength * pointLength; i++) {
-            edgesArray[i] = new EdgeModel(pointArray[stickGame.getStart(i)].getCenter(),
-                    pointArray[stickGame.getEnd(i)].getCenter(), fieldWidth / 10, anchorPane);
+            edgesArray[i] = new EdgeModel(pointArray[gameConverter.getStart(i)].getCenter(),
+                    pointArray[gameConverter.getEnd(i)].getCenter(), fieldWidth / 10, anchorPane);
         }
         this.client = client;
         curentEdgeCount = 0;
@@ -134,21 +132,9 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
         pointArray[number].disactive();
     }
 
-    @Override
     public void handle(MouseEvent event) {
         Point2D point2D = new Point2D(event.getSceneX(), event.getSceneY());
         findClickedPoint(point2D);
-    }
-
-    public void refresh(boolean[] state) {
-        boolean[] array = stickGame.getEdges();
-        for (int i = 0; i < state.length; i++) {
-            if ((state[i]) && (!array[i])) {
-                int start = stickGame.getStart(i);
-                int end = stickGame.getEnd(i);
-                addEdge(start, end);
-            }
-        }
     }
 
 

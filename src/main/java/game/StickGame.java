@@ -48,22 +48,6 @@ public class StickGame {
         return (activeStickArray[upStick] && activeStickArray[downStick] && activeStickArray[leftStick] && activeStickArray[rightStick]);
     }
 
-    protected int getLeftCell(int stickNumber) {
-        int number = stickNumber - pointLength * stickLength;
-        if (number < 0)
-            return -1;
-        if (number < stickLength)
-            return -1;
-        return stickLength * (number / stickLength) + number % stickLength - 1;
-    }
-
-    protected int getRightCell(int stickNumber) {
-        int leftCell = getLeftCell(stickNumber);
-        if (leftCell % stickLength == 3)
-            return -1;
-        return leftCell + 1;
-    }
-
     private void addOwner(int stickNumber, String playerName) {
         if (stickNumber < stickLength * pointLength) {
             int upCell = stickNumber - stickLength;
@@ -78,8 +62,8 @@ public class StickGame {
             }
         } else {
 
-            int leftCell = getLeftCell(stickNumber);
-            int rightCell = getRightCell(stickNumber);
+            int leftCell = gameConverter.getLeftCell(stickNumber);
+            int rightCell = gameConverter.getRightCell(stickNumber);
             if (leftCell != -1) {
                 if (isClosed(leftCell))
                     setOwnerCell(leftCell, playerName);
@@ -92,10 +76,6 @@ public class StickGame {
 
     }
 
-    public boolean[] getActiveStickArray() {
-        return activeStickArray;
-    }
-
     public void addStick(int firstPointNumber, int secondPointNumber, String playerName) {
         int stickNumber = gameConverter.getStickNumber(firstPointNumber, secondPointNumber);
         if (stickNumber != -1) {
@@ -106,10 +86,6 @@ public class StickGame {
         }
     }
 
-    public int getStickCount(){
-        return currentActiveStick;
-    }
-
     public int getCurrentOwnerCount(){
         return currentOwnerCount;
     }
@@ -118,27 +94,6 @@ public class StickGame {
         if(currentOwnerCount==stickLength*stickLength)
             return true;
         return false;
-    }
-
-    public int getStart(int stickNumber){
-        if(stickNumber<stickLength*pointLength){
-            int row = stickNumber/stickLength;
-            int column =stickNumber%stickLength;
-            return pointLength*row+column;
-        }else {
-            int number = stickNumber-pointLength*stickLength;
-            int row = number%stickLength;
-            int column = number/stickLength;
-            return pointLength*row+column;
-
-        }
-    }
-
-    public int getEnd(int stickNumber){
-        int start = getStart(stickNumber);
-        if(stickNumber<stickLength*pointLength)
-            return start+1;
-        return start+pointLength;
     }
 
     public boolean[] getEdges(){
