@@ -108,6 +108,7 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
                     if (gameConverter.getStickNumber(firstClickedPoint, res) != -1) {
                         secondClickedPoint = res;
                         active(res);
+                        System.out.println("write "+firstClickedPoint+" "+secondClickedPoint);
                         if (client.turn(firstClickedPoint, secondClickedPoint)) {
                             curentEdgeCount++;
 
@@ -145,11 +146,9 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
         ownerArray[number].show();
         if(b){
             ownerArray[number].Me();
-            System.out.println(number+"Me");
         }
         else {
             ownerArray[number].NotMe();
-            System.out.println(number+"NoMe");
         }
     }
 }

@@ -55,6 +55,16 @@ public class GameConverterTest {
     }
 
     @Test
+    public void getLeftCellTest3() {
+        GameConverter gameConverter = new GameConverter(4);
+
+        int actual = gameConverter.getLeftCell(29);
+        int expected = 5;
+
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
     public void getStartTest1(){
         GameConverter gameConverter = new GameConverter(4);
 
@@ -83,4 +93,5 @@ public class GameConverterTest {
 
         Assert.assertEquals(actual,expected);
     }
+
 }

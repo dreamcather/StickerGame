@@ -49,22 +49,6 @@ public class Client {
         return false;
     }
 
-    public boolean[] getStation(){
-        try {
-            return bridge.getState();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public void addEdge(int start,int end){
-        try {
-            bridge.addEdge(start,end,name);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void createGame() {
         clientGUI.createGame();

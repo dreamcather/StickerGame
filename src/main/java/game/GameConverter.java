@@ -37,12 +37,10 @@ public class GameConverter {
     }
 
     protected int getLeftCell(int stickNumber) {
-        int number = stickNumber - pointLength * stickLength;
-        if (number < 0)
-            return -1;
-        if (number < stickLength)
-            return -1;
-        return stickLength * (number / stickLength) + number % stickLength - 1;
+       int number = stickNumber-stickLength*pointLength;
+       int row =number%stickLength;
+       int column = (int)Math.ceil(number/stickLength);
+       return row*stickLength+column-1;
     }
 
     protected int getRightCell(int stickNumber) {
