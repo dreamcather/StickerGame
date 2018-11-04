@@ -49,8 +49,6 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
         }
         this.client =client;
         curentEdgeCount=0;
-        RefreshLoop refreshLoop = new RefreshLoop(this,client);
-        refreshLoop.start();
     }
 
     private Point2D getPointCoordinate(int number){

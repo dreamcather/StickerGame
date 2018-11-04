@@ -17,13 +17,21 @@ public class Client {
     public Client(Bridge bridge) throws RemoteException, MalformedURLException {
         this.bridge = bridge;
         callBack = new CallBackClass();
-        Naming.rebind("Client",callBack);
         try {
             name = bridge.getName();
             System.out.println(name);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean logIn(String name, String password){
+        try {
+            return bridge.logIn(name,password);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public boolean turn(int start, int end){

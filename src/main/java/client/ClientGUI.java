@@ -63,6 +63,7 @@ public class ClientGUI extends Application {
 
         result.ifPresent(pair -> {
             System.out.println("From=" + pair.getKey() + ", To=" + pair.getValue());
+            System.out.println(client.logIn(pair.getKey(),pair.getValue()));
         });
     }
 
@@ -76,10 +77,10 @@ public class ClientGUI extends Application {
         client = new Client(bridge);
         scene = new Scene(layout, 750, 600);
         window.setScene(scene);
-        registartion();
-        //visualStickGame = new VisualStickGame(50, 50, 300, 300, 4, layout,client);
-        //visualStickGame.show();
-        //scene.setOnMouseClicked(visualStickGame::handle);
+        //registartion();
+        visualStickGame = new VisualStickGame(50, 50, 300, 300, 4, layout,client);
+        visualStickGame.show();
+        scene.setOnMouseClicked(visualStickGame::handle);
         window.show();
     }
 }
