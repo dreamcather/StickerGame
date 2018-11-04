@@ -17,6 +17,7 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
     private GameBackground sceneBackground;
     private GameBorder sceneBorder;
     private PointModel[] pointArray;
+    private PointModel[] ownerArray;
     private EdgeModel[] edgesArray;
     private Pane anchorPane;
     StickGame stickGame;
@@ -42,6 +43,12 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
         for (int i = 0; i < pointLength * pointLength; i++) {
             pointArray[i] = new PointModel(getPointCoordinate(i), (int) fieldWidth / 5, anchorPane, i);
         }
+
+        ownerArray = new PointModel[stickLength*stickLength];
+        for (int i = 0; i < stickLength * stickLength; i++) {
+            ownerArray[i] = new PointModel(getShiftPointCoordinate(i), (int) fieldWidth / 10, anchorPane, i);
+            ownerArray[i].hide();
+        }
         edgesArray = new EdgeModel[2 * stickLength * pointLength];
         for (int i = 0; i < 2 * stickLength * pointLength; i++) {
             edgesArray[i] = new EdgeModel(pointArray[stickGame.getStart(i)].getCenter(),
@@ -57,6 +64,16 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
         int x = xStart + (column + 1) * fieldWidth;
         int y = yStart + (row + 1) * fieldWidth;
         return new Point2D(x, y);
+    }
+
+    private Point2D getShiftPointCoordinate(int number) {
+        int row = number/stickLength;
+        int column = number%stickLength;
+
+        int parent = row*pointLength+column;
+
+        Point2D parentPoint = getPointCoordinate(parent);
+        return new Point2D(parentPoint.getX()+fieldWidth/2,parentPoint.getY()+fieldWidth/2);
     }
 
     public void addEdge(int first, int second) {
@@ -130,6 +147,7 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
             }
         }
     }
+
 
     public int getCurentEdgeCount() {
         return curentEdgeCount;
