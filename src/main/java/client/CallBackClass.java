@@ -26,6 +26,11 @@ public class CallBackClass extends UnicastRemoteObject implements CallBack,Seria
         client.reportEdge(firstPointNumber,secondPointNumber);
     }
 
+    @Override
+    public void reportOwner(int number, String playerName) {
+        client.reportOwner(number,playerName);
+    }
+
     public String getName() {
         return name;
     }

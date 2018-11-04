@@ -77,4 +77,10 @@ public class Client {
     public void setVisualGame(VisualStickGame visualStickGame) {
         this.visualStickGame = visualStickGame;
     }
+
+    public void reportOwner(int number, String playerName) {
+        if(name.equals(playerName))
+            visualStickGame.addOwner(number,true);
+        else visualStickGame.addOwner(number,false);
+    }
 }

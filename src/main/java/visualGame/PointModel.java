@@ -50,6 +50,14 @@ public class PointModel implements VisualObject {
         source.setFill(Color.RED);
         source.toFront();
     }
+    public void Me(){
+        source.setFill(Color.GREEN);
+        source.toFront();
+    }
+    public void NotMe(){
+        source.setFill(Color.BLUE);
+        source.toFront();
+    }
 
     public void disactive(){source.setFill(Color.BLACK);}
 

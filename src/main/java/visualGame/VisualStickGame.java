@@ -152,4 +152,14 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
     public int getCurentEdgeCount() {
         return curentEdgeCount;
     }
+
+    public void addOwner(int number, boolean b) {
+        ownerArray[number].show();
+        if(b){
+            ownerArray[number].Me();
+        }
+        else {
+            ownerArray[number].NotMe();
+        }
+    }
 }

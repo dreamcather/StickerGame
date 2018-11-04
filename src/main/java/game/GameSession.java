@@ -52,4 +52,12 @@ public class GameSession {
     public boolean[] getStation(){
         return stickGame.getEdges();
     }
+
+    public void reportOwner(int number, String playerName) {
+        try {
+            firstPlayer.reportOwner(number,playerName);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
 }

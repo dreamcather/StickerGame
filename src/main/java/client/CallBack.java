@@ -8,4 +8,6 @@ public interface CallBack extends Remote {
     public void getMessage(String string)throws RemoteException;
     void createGame() throws RemoteException;
     void reportEdge(int firstPointNumber, int secondPointNumber) throws RemoteException;
+
+    void reportOwner(int number, String playerName) throws RemoteException;
 }

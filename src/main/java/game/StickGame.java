@@ -31,6 +31,7 @@ public class StickGame {
 
     private void setOwnerCell(int number, String playerName) {
         namesOwnerArray[number] = playerName;
+        gameSession.reportOwner(number,playerName);
         currentOwnerCount++;
     }
 
