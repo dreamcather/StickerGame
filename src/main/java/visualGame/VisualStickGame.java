@@ -48,7 +48,7 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
         ownerArray = new PointModel[stickLength*stickLength];
         for (int i = 0; i < stickLength * stickLength; i++) {
             ownerArray[i] = new PointModel(getShiftPointCoordinate(i), (int) fieldWidth / 10, anchorPane, i);
-            ownerArray[i].hide();
+            //ownerArray[i].hide();
         }
         edgesArray = new EdgeModel[2 * stickLength * pointLength];
         for (int i = 0; i < 2 * stickLength * pointLength; i++) {
@@ -68,7 +68,7 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
     }
 
     private Point2D getShiftPointCoordinate(int number) {
-        int row = number/stickLength;
+        int row = (int)Math.ceil(number/stickLength);
         int column = number%stickLength;
 
         int parent = row*pointLength+column;
