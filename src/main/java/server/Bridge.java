@@ -14,4 +14,6 @@ public interface Bridge extends Remote {
     public boolean[] getState() throws RemoteException;
     void addClient(CallBack client) throws RemoteException;
     boolean logIn(String name,String password)throws RemoteException;
+
+    void addEdge(int start, int end,String name) throws RemoteException;
 }

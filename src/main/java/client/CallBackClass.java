@@ -22,6 +22,10 @@ public class CallBackClass extends UnicastRemoteObject implements CallBack,Seria
         client.createGame();
     }
 
+    public void reportEdge(int firstPointNumber, int secondPointNumber) {
+        client.reportEdge(firstPointNumber,secondPointNumber);
+    }
+
     public String getName() {
         return name;
     }

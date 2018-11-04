@@ -87,5 +87,10 @@ public class BridgeClass extends UnicastRemoteObject implements Bridge {
         return false;
     }
 
+    @Override
+    public void addEdge(int start, int end,String name) {
+        gameSession.addStick(start,end,name);
+    }
+
 
 }

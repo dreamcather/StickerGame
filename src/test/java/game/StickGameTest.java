@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 public class StickGameTest {
     @Test
     public void getStickNumberTest1() {
-        StickGame stickGame = new StickGame(4);
+        StickGame stickGame = new StickGame(4,null);
 
         int actual = stickGame.getStickNumber(5, 10);
         int expected = 21;
@@ -16,7 +16,7 @@ public class StickGameTest {
 
     @Test
     public void getStickNumberTest2() {
-        StickGame stickGame = new StickGame(4);
+        StickGame stickGame = new StickGame(4,null);
 
         int actual = stickGame.getStickNumber(18, 17);
         int expected = 14;
@@ -26,7 +26,7 @@ public class StickGameTest {
 
     @Test
     public void getStickNumberTest3() {
-        StickGame stickGame = new StickGame(4);
+        StickGame stickGame = new StickGame(4,null);
 
         int actual = stickGame.getStickNumber(21, 17);
         int expected = -1;
@@ -36,7 +36,7 @@ public class StickGameTest {
 
     @Test
     public void isClosedTest1() {
-        StickGame stickGame = new StickGame(4);
+        StickGame stickGame = new StickGame(4,null);
         stickGame.addStick(11, 12, null);
         stickGame.addStick(11, 16, null);
         stickGame.addStick(12, 17, null);
@@ -47,7 +47,7 @@ public class StickGameTest {
 
     @Test
     public void isClosedTest2() {
-        StickGame stickGame = new StickGame(4);
+        StickGame stickGame = new StickGame(4,null);
         stickGame.addStick(5, 10, null);
         stickGame.addStick(11, 6, null);
         stickGame.addStick(11, 10, null);
@@ -58,7 +58,7 @@ public class StickGameTest {
 
     @Test
     public void isClosedTest3() {
-        StickGame stickGame = new StickGame(4);
+        StickGame stickGame = new StickGame(4,null);
         stickGame.addStick(5, 10, null);
         stickGame.addStick(11, 6, null);
         stickGame.addStick(11, 10, null);
@@ -69,7 +69,7 @@ public class StickGameTest {
 
     @Test
     public void getLeftCellTest1() {
-        StickGame stickGame = new StickGame(4);
+        StickGame stickGame = new StickGame(4,null);
 
         int actual = stickGame.getLeftCell(30);
         int expected = 9;
@@ -79,7 +79,7 @@ public class StickGameTest {
 
     @Test
     public void getLeftCellTest2() {
-        StickGame stickGame = new StickGame(4);
+        StickGame stickGame = new StickGame(4,null);
 
         int actual = stickGame.getLeftCell(25);
         int expected = 4;
@@ -89,7 +89,7 @@ public class StickGameTest {
 
     @Test
     public void addStickTest1() {
-        StickGame stickGame = new StickGame(4);
+        StickGame stickGame = new StickGame(4,null);
         stickGame.addStick(11, 12, null);
         stickGame.addStick(11, 16, null);
         stickGame.addStick(12, 17, null);
@@ -103,7 +103,7 @@ public class StickGameTest {
 
     @Test
     public void getStartTest1(){
-        StickGame stickGame = new StickGame(4);
+        StickGame stickGame = new StickGame(4,null);
 
         int actual = stickGame.getStart(14);
         int expected = 17;
@@ -113,7 +113,7 @@ public class StickGameTest {
 
     @Test
     public void getStartTest2(){
-        StickGame stickGame = new StickGame(4);
+        StickGame stickGame = new StickGame(4,null);
 
         int actual = stickGame.getStart(37);
         int expected = 9;

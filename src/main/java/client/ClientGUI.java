@@ -87,6 +87,7 @@ public class ClientGUI extends Application {
     public void createGame() {
         Platform.runLater(()->{
         visualStickGame = new VisualStickGame(50, 50, 300, 300, 4, layout,client);
+        client.setVisualGame(visualStickGame);
         visualStickGame.show();
         scene.setOnMouseClicked(visualStickGame::handle);
         });

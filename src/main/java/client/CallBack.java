@@ -7,5 +7,5 @@ public interface CallBack extends Remote {
     final String NAME ="CallBack";
     public void getMessage(String string)throws RemoteException;
     void createGame() throws RemoteException;
-
+    void reportEdge(int firstPointNumber, int secondPointNumber) throws RemoteException;
 }

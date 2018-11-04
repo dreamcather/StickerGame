@@ -9,8 +9,10 @@ public class StickGame {
     private int currentOwnerCount;
     private boolean[] activeStickArray;
     private String[] namesOwnerArray;
+    private GameSession gameSession;
 
-    public StickGame(int stickLength) {
+    public StickGame(int stickLength,GameSession gameSession) {
+        this.gameSession =gameSession;
         this.stickLength = stickLength;
         pointLength = stickLength + 1;
         stickSize = 2 * stickLength * pointLength;
@@ -119,6 +121,7 @@ public class StickGame {
         int stickNumber = getStickNumber(firstPointNumber, secondPointNumber);
         if (stickNumber != -1) {
             addStick(stickNumber);
+            gameSession.reportEdge(firstPointNumber,secondPointNumber);
             currentActiveStick++;
             addOwner(stickNumber, playerName);
         }

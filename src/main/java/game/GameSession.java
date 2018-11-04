@@ -1,7 +1,8 @@
 package game;
 
 import client.CallBack;
-import client.CallBackClass;
+
+import java.rmi.RemoteException;
 
 public class GameSession {
     CallBack firstPlayer;
@@ -12,8 +13,8 @@ public class GameSession {
     public GameSession(int count, CallBack firstPlayer, CallBack secondPlayer) {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
-        curentPlayer  =null;
-        stickGame = new StickGame(count);
+        curentPlayer  ="first";
+        stickGame = new StickGame(count,this);
     }
 
     private boolean isMyTurn(String name){
@@ -23,6 +24,11 @@ public class GameSession {
     }
 
     private void changeTurn(){
+        if(curentPlayer.equals("first"))
+            curentPlayer="second";
+        else {
+            curentPlayer="first";
+        }
     }
 
     public boolean addStick(int firstPointNumber, int secondPointNumber, String name){
@@ -32,6 +38,15 @@ public class GameSession {
             return true;
         }
         return false;
+    }
+
+    public void reportEdge(int firstPointNumber,int secondPointNumber){
+        try {
+            firstPlayer.reportEdge(firstPointNumber,secondPointNumber);
+            secondPlayer.reportEdge(firstPointNumber,secondPointNumber);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean[] getStation(){

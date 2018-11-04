@@ -25,38 +25,38 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
     private Client client;
     private int curentEdgeCount;
 
-    public VisualStickGame(int xStart, int yStart, int width, int height, int squareCount, Pane anchorPane,Client client) {
+    public VisualStickGame(int xStart, int yStart, int width, int height, int squareCount, Pane anchorPane, Client client) {
         this.xStart = xStart;
         this.yStart = yStart;
         pointLength = squareCount + 1;
         stickLength = squareCount;
         fieldWidth = width / (pointLength + 1);
-        stickGame = new StickGame(squareCount);
         this.anchorPane = anchorPane;
+        stickGame = new StickGame(squareCount, null);
         sceneBackground = new GameBackground(xStart + borderWidth, yStart + borderWidth,
                 width - borderWidth, height - borderWidth, anchorPane);
         sceneBackground.show();
         sceneBorder = new GameBorder(xStart, yStart, width, height, borderWidth, anchorPane);
 
-        pointArray = new PointModel[pointLength*pointLength];
-        for(int i = 0;i<pointLength*pointLength;i++){
-            pointArray[i] = new PointModel(getPointCoordinate(i),(int)fieldWidth/5,anchorPane,i);
+        pointArray = new PointModel[pointLength * pointLength];
+        for (int i = 0; i < pointLength * pointLength; i++) {
+            pointArray[i] = new PointModel(getPointCoordinate(i), (int) fieldWidth / 5, anchorPane, i);
         }
-        edgesArray = new EdgeModel[2*stickLength*pointLength];
-        for(int i=0;i<2*stickLength*pointLength;i++){
+        edgesArray = new EdgeModel[2 * stickLength * pointLength];
+        for (int i = 0; i < 2 * stickLength * pointLength; i++) {
             edgesArray[i] = new EdgeModel(pointArray[stickGame.getStart(i)].getCenter(),
-                    pointArray[stickGame.getEnd(i)].getCenter(),fieldWidth/10,anchorPane);
+                    pointArray[stickGame.getEnd(i)].getCenter(), fieldWidth / 10, anchorPane);
         }
-        this.client =client;
-        curentEdgeCount=0;
+        this.client = client;
+        curentEdgeCount = 0;
     }
 
-    private Point2D getPointCoordinate(int number){
-        int row = number/pointLength;
-        int column = number%pointLength;
-        int x =xStart+(column+1)*fieldWidth;
-        int y = yStart+(row+1)*fieldWidth;
-        return new Point2D(x,y);
+    private Point2D getPointCoordinate(int number) {
+        int row = number / pointLength;
+        int column = number % pointLength;
+        int x = xStart + (column + 1) * fieldWidth;
+        int y = yStart + (row + 1) * fieldWidth;
+        return new Point2D(x, y);
     }
 
     public void addEdge(int first, int second) {
@@ -90,16 +90,15 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
                     if (stickGame.getStickNumber(firstClickedPoint, res) != -1) {
                         secondClickedPoint = res;
                         active(res);
-                        if (stickGame.getStickNumber(firstClickedPoint, secondClickedPoint) != -1) {
-                            if(client.turn(firstClickedPoint,secondClickedPoint)) {
-                                addEdge(firstClickedPoint, secondClickedPoint);
-                                curentEdgeCount++;
-                            }
-                            disactive(firstClickedPoint);
-                            disactive(secondClickedPoint);
-                            firstClickedPoint = -1;
-                            secondClickedPoint = -1;
+                        if (client.turn(firstClickedPoint, secondClickedPoint)) {
+                            //client.addEdge(firstClickedPoint,secondClickedPoint);
+                            curentEdgeCount++;
+
                         }
+                        disactive(firstClickedPoint);
+                        disactive(secondClickedPoint);
+                        firstClickedPoint = -1;
+                        secondClickedPoint = -1;
                         return res;
                     }
                 }
@@ -121,18 +120,18 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
         findClickedPoint(point2D);
     }
 
-    public void refresh(boolean[] state){
-        boolean [] array = stickGame.getEdges();
-        for(int i=0;i<state.length;i++){
-            if((state[i])&&(!array[i])){
+    public void refresh(boolean[] state) {
+        boolean[] array = stickGame.getEdges();
+        for (int i = 0; i < state.length; i++) {
+            if ((state[i]) && (!array[i])) {
                 int start = stickGame.getStart(i);
                 int end = stickGame.getEnd(i);
-                addEdge(start,end);
+                addEdge(start, end);
             }
         }
     }
 
-    public int getCurentEdgeCount(){
+    public int getCurentEdgeCount() {
         return curentEdgeCount;
     }
 }
