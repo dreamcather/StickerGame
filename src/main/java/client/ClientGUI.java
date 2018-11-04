@@ -78,9 +78,9 @@ public class ClientGUI extends Application {
         scene = new Scene(layout, 750, 600);
         window.setScene(scene);
         //registartion();
-        visualStickGame = new VisualStickGame(50, 50, 300, 300, 4, layout,client);
-        visualStickGame.show();
-        scene.setOnMouseClicked(visualStickGame::handle);
+        //visualStickGame = new VisualStickGame(50, 50, 300, 300, 4, layout,client);
+        //visualStickGame.show();
+        //scene.setOnMouseClicked(visualStickGame::handle);
         window.show();
     }
 }

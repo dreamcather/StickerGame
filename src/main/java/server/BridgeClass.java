@@ -24,7 +24,7 @@ public class BridgeClass extends UnicastRemoteObject implements Bridge {
     private Connection connection;
     String firstPlayer;
     String secondPlayer;
-    private HashMap<Integer,CallBackClass> clientMap;
+    private HashMap<Integer,CallBack> clientMap;
     private int idCounter;
     CallBack firstClient;
 
@@ -40,14 +40,6 @@ public class BridgeClass extends UnicastRemoteObject implements Bridge {
     public String getName() throws RemoteException {
         if(firstPlayer==null){
             firstPlayer ="first";
-            try {
-                firstClient = (CallBack) Naming.lookup("Client");
-                firstClient.getMessage("Fuck");
-            } catch (NotBoundException e) {
-                e.printStackTrace();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
             return firstPlayer;
         }
         String secondPlayer = "second";
@@ -62,11 +54,12 @@ public class BridgeClass extends UnicastRemoteObject implements Bridge {
         return gameSession.getStation();
     }
 
-    public void addClient(CallBackClass client) throws RemoteException {
+    public void addClient(CallBack client) throws RemoteException {
         clientMap.put(idCounter,client);
         idCounter++;
         if(idCounter>1){
             gameSession =new GameSession(4,clientMap.get(0),clientMap.get(1));
+            System.out.println("Game Session create");
         }
     }
 

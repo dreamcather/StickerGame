@@ -1,5 +1,6 @@
 package server;
 
+import client.CallBack;
 import client.CallBackClass;
 
 import java.rmi.Remote;
@@ -11,6 +12,6 @@ public interface Bridge extends Remote {
     public String getName() throws RemoteException;
     public boolean turn(int start, int second, String name) throws RemoteException;
     public boolean[] getState() throws RemoteException;
-    void addClient(CallBackClass client) throws RemoteException;
+    void addClient(CallBack client) throws RemoteException;
     boolean logIn(String name,String password)throws RemoteException;
 }

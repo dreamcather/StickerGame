@@ -1,17 +1,18 @@
 package game;
 
+import client.CallBack;
 import client.CallBackClass;
 
 public class GameSession {
-    CallBackClass firstPlayer;
-    CallBackClass secondPlayer;
+    CallBack firstPlayer;
+    CallBack secondPlayer;
     StickGame stickGame;
     String curentPlayer;
 
-    public GameSession(int count,CallBackClass firstPlayer, CallBackClass secondPlayer) {
+    public GameSession(int count, CallBack firstPlayer, CallBack secondPlayer) {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
-        curentPlayer = firstPlayer.getName();
+        curentPlayer  =null;
         stickGame = new StickGame(count);
     }
 
@@ -22,10 +23,6 @@ public class GameSession {
     }
 
     private void changeTurn(){
-        if(curentPlayer.equals(firstPlayer))
-            curentPlayer = secondPlayer.getName();
-        else
-            curentPlayer =firstPlayer.getName();
     }
 
     public boolean addStick(int firstPointNumber, int secondPointNumber, String name){

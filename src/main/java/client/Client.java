@@ -23,6 +23,7 @@ public class Client {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+        bridge.addClient(callBack);
     }
 
     public boolean logIn(String name, String password){
