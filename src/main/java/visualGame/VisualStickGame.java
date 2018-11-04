@@ -145,9 +145,11 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
         ownerArray[number].show();
         if(b){
             ownerArray[number].Me();
+            System.out.println(number+"Me");
         }
         else {
             ownerArray[number].NotMe();
+            System.out.println(number+"NoMe");
         }
     }
 }

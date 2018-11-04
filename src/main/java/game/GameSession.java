@@ -56,6 +56,7 @@ public class GameSession implements ReportInterface {
     public void reportOwner(int number, String playerName) {
         try {
             firstPlayer.reportOwner(number,playerName);
+            secondPlayer.reportOwner(number,playerName);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
