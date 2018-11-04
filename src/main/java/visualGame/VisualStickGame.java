@@ -1,6 +1,7 @@
 package visualGame;
 
 import client.Client;
+import game.GameConverter;
 import game.StickGame;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
@@ -20,9 +21,10 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
     private PointModel[] ownerArray;
     private EdgeModel[] edgesArray;
     private Pane anchorPane;
-    StickGame stickGame;
+    private GameConverter gameConverter;
     private int firstClickedPoint = -1;
     private int secondClickedPoint = -1;
+    private StickGame stickGame;
     private Client client;
     private int curentEdgeCount;
 
@@ -33,7 +35,8 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
         stickLength = squareCount;
         fieldWidth = width / (pointLength + 1);
         this.anchorPane = anchorPane;
-        stickGame = new StickGame(squareCount, null);
+        stickGame =new StickGame(squareCount,null);
+        gameConverter =new GameConverter(stickLength);
         sceneBackground = new GameBackground(xStart + borderWidth, yStart + borderWidth,
                 width - borderWidth, height - borderWidth, anchorPane);
         sceneBackground.show();
@@ -77,7 +80,7 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
     }
 
     public void addEdge(int first, int second) {
-        int stickNumber = stickGame.getStickNumber(first, second);
+        int stickNumber = gameConverter.getStickNumber(first, second);
         edgesArray[stickNumber].show();
     }
 
@@ -104,7 +107,7 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
                     return res;
                 }
                 if (secondClickedPoint == -1) {
-                    if (stickGame.getStickNumber(firstClickedPoint, res) != -1) {
+                    if (gameConverter.getStickNumber(firstClickedPoint, res) != -1) {
                         secondClickedPoint = res;
                         active(res);
                         if (client.turn(firstClickedPoint, secondClickedPoint)) {
