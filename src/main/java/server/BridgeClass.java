@@ -59,6 +59,8 @@ public class BridgeClass extends UnicastRemoteObject implements Bridge {
         idCounter++;
         if(idCounter>1){
             gameSession =new GameSession(4,clientMap.get(0),clientMap.get(1));
+            clientMap.get(0).createGame();
+            clientMap.get(1).createGame();
             System.out.println("Game Session create");
         }
     }

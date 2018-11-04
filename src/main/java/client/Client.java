@@ -1,6 +1,7 @@
 package client;
 
 import server.Bridge;
+import visualGame.VisualStickGame;
 
 import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
@@ -13,16 +14,20 @@ public class Client {
     String name;
     Bridge bridge;
     CallBack callBack;
+    VisualStickGame visualStickGame;
+    ClientGUI clientGUI;
 
-    public Client(Bridge bridge) throws RemoteException, MalformedURLException {
+    public Client(Bridge bridge,VisualStickGame visualStickGame,ClientGUI clientGUI) throws RemoteException, MalformedURLException {
+        this.visualStickGame =visualStickGame;
         this.bridge = bridge;
-        callBack = new CallBackClass();
+        this.clientGUI =clientGUI;
         try {
             name = bridge.getName();
             System.out.println(name);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+        callBack = new CallBackClass(name,this);
         bridge.addClient(callBack);
     }
 
@@ -51,5 +56,9 @@ public class Client {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void createGame() {
+        clientGUI.createGame();
     }
 }
