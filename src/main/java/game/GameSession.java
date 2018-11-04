@@ -4,7 +4,7 @@ import client.CallBack;
 
 import java.rmi.RemoteException;
 
-public class GameSession {
+public class GameSession implements ReportInterface {
     CallBack firstPlayer;
     CallBack secondPlayer;
     StickGame stickGame;

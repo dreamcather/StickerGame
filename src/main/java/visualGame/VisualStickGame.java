@@ -109,7 +109,6 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
                         secondClickedPoint = res;
                         active(res);
                         if (client.turn(firstClickedPoint, secondClickedPoint)) {
-                            //client.addEdge(firstClickedPoint,secondClickedPoint);
                             curentEdgeCount++;
 
                         }

@@ -5,20 +5,18 @@ public class StickGame {
     private int pointLength;
     private int stickSize;
     private int pointSize;
-    private int currentActiveStick;
     private int currentOwnerCount;
     private boolean[] activeStickArray;
     private String[] namesOwnerArray;
-    private GameSession gameSession;
+    private ReportInterface reportInterface;
     private GameConverter gameConverter;
 
-    public StickGame(int stickLength,GameSession gameSession) {
+    public StickGame(int stickLength,ReportInterface reportInterface) {
         gameConverter=new GameConverter(stickLength);
-        this.gameSession =gameSession;
+        this.reportInterface = reportInterface;
         this.stickLength = stickLength;
         pointLength = stickLength + 1;
         stickSize = 2 * stickLength * pointLength;
-        currentActiveStick = 0;
         currentOwnerCount = 0;
         activeStickArray = new boolean[stickSize];
         namesOwnerArray = new String[stickLength * stickLength];
@@ -33,7 +31,7 @@ public class StickGame {
 
     private void setOwnerCell(int number, String playerName) {
         namesOwnerArray[number] = playerName;
-        gameSession.reportOwner(number,playerName);
+        reportInterface.reportOwner(number,playerName);
         currentOwnerCount++;
     }
 
@@ -80,14 +78,9 @@ public class StickGame {
         int stickNumber = gameConverter.getStickNumber(firstPointNumber, secondPointNumber);
         if (stickNumber != -1) {
             addStick(stickNumber);
-            gameSession.reportEdge(firstPointNumber,secondPointNumber);
-            currentActiveStick++;
+            reportInterface.reportEdge(firstPointNumber,secondPointNumber);
             addOwner(stickNumber, playerName);
         }
-    }
-
-    public int getCurrentOwnerCount(){
-        return currentOwnerCount;
     }
 
     public boolean isEndGame(){

@@ -5,18 +5,10 @@ public class GameConverter {
     private int pointLength;
     private int stickSize;
     private int pointSize;
-    private int currentActiveStick;
-    private int currentOwnerCount;
-    private boolean[] activeStickArray;
-    private String[] namesOwnerArray;
     public GameConverter(int stickLength) {
         this.stickLength = stickLength;
         pointLength = stickLength + 1;
         stickSize = 2 * stickLength * pointLength;
-        currentActiveStick = 0;
-        currentOwnerCount = 0;
-        activeStickArray = new boolean[stickSize];
-        namesOwnerArray = new String[stickLength * stickLength];
         pointSize = pointLength * pointLength;
     }
 
