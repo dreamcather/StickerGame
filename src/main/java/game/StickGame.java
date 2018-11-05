@@ -33,7 +33,7 @@ public class StickGame {
         namesOwnerArray[number] = playerName;
         reportInterface.reportOwner(number,playerName);
         currentOwnerCount++;
-        System.out.println("Owner"+number);
+        reportInterface.getExtraTurn();
     }
 
     protected boolean isClosed(int number) {

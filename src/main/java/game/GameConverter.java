@@ -3,12 +3,10 @@ package game;
 public class GameConverter {
     private int stickLength;
     private int pointLength;
-    private int stickSize;
     private int pointSize;
     public GameConverter(int stickLength) {
         this.stickLength = stickLength;
         pointLength = stickLength + 1;
-        stickSize = 2 * stickLength * pointLength;
         pointSize = pointLength * pointLength;
     }
 

@@ -8,30 +8,41 @@ public class GameSession implements ReportInterface {
     CallBack firstPlayer;
     CallBack secondPlayer;
     StickGame stickGame;
-    String curentPlayer;
+    String currentPlayer;
+    boolean extraTurn;
 
     public GameSession(int count, CallBack firstPlayer, CallBack secondPlayer) {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
-        curentPlayer  ="first";
+        currentPlayer ="first";
+        extraTurn = false;
         stickGame = new StickGame(count,this);
     }
 
     private boolean isMyTurn(String name){
-        if(name.equals(curentPlayer))
+        if(name.equals(currentPlayer))
             return true;
         return false;
     }
 
     private void changeTurn(){
-        if(curentPlayer.equals("first"))
-            curentPlayer="second";
-        else {
-            curentPlayer="first";
+        if(!extraTurn) {
+            if (currentPlayer.equals("first"))
+                currentPlayer = "second";
+            else {
+                currentPlayer = "first";
+            }
+        }
+        else{
+            extraTurn=false;
         }
     }
 
-    public boolean addStick(int firstPointNumber, int secondPointNumber, String name){
+    public void getExtraTurn(){
+        extraTurn = true;
+    }
+
+    public synchronized boolean addStick(int firstPointNumber, int secondPointNumber, String name){
         if(isMyTurn(name)){
             stickGame.addStick(firstPointNumber,secondPointNumber,name);
             changeTurn();

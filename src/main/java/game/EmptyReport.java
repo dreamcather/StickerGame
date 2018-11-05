@@ -10,4 +10,9 @@ public class EmptyReport implements ReportInterface {
     public void reportOwner(int number, String playerName) {
 
     }
+
+    @Override
+    public void getExtraTurn() {
+
+    }
 }
