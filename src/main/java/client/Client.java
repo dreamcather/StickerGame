@@ -3,17 +3,18 @@ package client;
 import server.Bridge;
 import visualGame.VisualStickGame;
 
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 
-public class Client {
+public class Client extends UnicastRemoteObject implements CallBack,Serializable {
     String name;
     Bridge bridge;
-    CallBack callBack;
     VisualStickGame visualStickGame;
     ClientGUI clientGUI;
 
@@ -27,8 +28,7 @@ public class Client {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        callBack = new CallBackClass(name,this);
-        bridge.addClient(callBack);
+        bridge.addClient(this);
     }
 
     public boolean logIn(String name, String password){
@@ -49,6 +49,10 @@ public class Client {
         return false;
     }
 
+    @Override
+    public void getMessage(String string) throws RemoteException {
+
+    }
 
     public void createGame() {
         clientGUI.createGame();
