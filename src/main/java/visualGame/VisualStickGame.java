@@ -2,7 +2,6 @@ package visualGame;
 
 import client.Client;
 import game.GameConverter;
-import game.StickGame;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
@@ -12,15 +11,11 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
     private int xStart;
     private int yStart;
     private int fieldWidth;
-    private final int borderWidth = 5;
     private int pointLength;
     private int stickLength;
-    private GameBackground sceneBackground;
-    private GameBorder sceneBorder;
     private PointModel[] pointArray;
     private PointModel[] ownerArray;
     private EdgeModel[] edgesArray;
-    private Pane anchorPane;
     private GameConverter gameConverter;
     private int firstClickedPoint = -1;
     private int secondClickedPoint = -1;
@@ -33,12 +28,13 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
         pointLength = squareCount + 1;
         stickLength = squareCount;
         fieldWidth = width / (pointLength + 1);
-        this.anchorPane = anchorPane;
+        Pane anchorPane1 = anchorPane;
         gameConverter =new GameConverter(stickLength);
-        sceneBackground = new GameBackground(xStart + borderWidth, yStart + borderWidth,
+        int borderWidth = 5;
+        GameBackground sceneBackground = new GameBackground(xStart + borderWidth, yStart + borderWidth,
                 width - borderWidth, height - borderWidth, anchorPane);
         sceneBackground.show();
-        sceneBorder = new GameBorder(xStart, yStart, width, height, borderWidth, anchorPane);
+        GameBorder sceneBorder = new GameBorder(xStart, yStart, width, height, borderWidth, anchorPane);
 
         pointArray = new PointModel[pointLength * pointLength];
         for (int i = 0; i < pointLength * pointLength; i++) {
@@ -82,34 +78,24 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
         edgesArray[stickNumber].show();
     }
 
-    public void show() {
-    }
-
-    public void hide() {
-
-    }
-
-    private int findClickedPoint(Point2D point) {
-        int res = -1;
+    private void findClickedPoint(Point2D point) {
+        int res;
         for (int j = 0; j < pointLength * pointLength; j++)
             if (pointArray[j].isNear(point)) {
                 res = pointArray[j].getNumber();
                 if (firstClickedPoint == -1) {
                     firstClickedPoint = res;
                     active(res);
-                    return res;
                 }
                 if (firstClickedPoint == res) {
                     firstClickedPoint = -1;
                     disactive(res);
-                    return res;
                 }
                 if (secondClickedPoint == -1) {
                     if (gameConverter.getStickNumber(firstClickedPoint, res) != -1) {
                         secondClickedPoint = res;
                         active(res);
-                        System.out.println("write "+firstClickedPoint+" "+secondClickedPoint);
-                        if (client.turn(firstClickedPoint, secondClickedPoint)) {
+                        if (client.addStick(firstClickedPoint, secondClickedPoint)) {
                             curentEdgeCount++;
 
                         }
@@ -117,29 +103,22 @@ public class VisualStickGame implements EventHandler<MouseEvent> {
                         disactive(secondClickedPoint);
                         firstClickedPoint = -1;
                         secondClickedPoint = -1;
-                        return res;
                     }
                 }
             }
-        return res;
     }
 
-    public void active(int number) {
+    private void active(int number) {
         pointArray[number].active();
     }
 
-    public void disactive(int number) {
+    private void disactive(int number) {
         pointArray[number].disactive();
     }
 
     public void handle(MouseEvent event) {
         Point2D point2D = new Point2D(event.getSceneX(), event.getSceneY());
         findClickedPoint(point2D);
-    }
-
-
-    public int getCurentEdgeCount() {
-        return curentEdgeCount;
     }
 
     public void addOwner(int number, boolean b) {

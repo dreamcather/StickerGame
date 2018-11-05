@@ -14,10 +14,10 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 public class Client extends UnicastRemoteObject implements CallBack,Serializable {
-    String name;
-    Bridge bridge;
-    VisualStickGame visualStickGame;
-    ClientGUI clientGUI;
+    private String name;
+    private Bridge bridge;
+    private VisualStickGame visualStickGame;
+    private ClientGUI clientGUI;
 
     public Client(ClientGUI clientGUI) throws RemoteException, MalformedURLException {
         Registry reg = LocateRegistry.getRegistry("localhost");
@@ -30,7 +30,6 @@ public class Client extends UnicastRemoteObject implements CallBack,Serializable
         this.clientGUI =clientGUI;
         try {
             name = bridge.getName();
-            System.out.println(name);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -46,17 +45,13 @@ public class Client extends UnicastRemoteObject implements CallBack,Serializable
         return false;
     }
 
-    public boolean turn(int start, int end){
+    public boolean addStick(int start, int end){
         try {
-            return bridge.turn(start,end,name);
+            return bridge.addStick(start,end,name);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
         return false;
-    }
-
-    public void getMessage(String string) throws RemoteException {
-
     }
 
     public void createGame() {

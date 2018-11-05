@@ -15,14 +15,13 @@ public class BridgeClass extends UnicastRemoteObject implements Bridge {
 
     private GameSession gameSession;
     private Connection connection;
-    String firstPlayer;
-    String secondPlayer;
+    private String firstPlayer;
+    private String secondPlayer;
     private HashMap<Integer,CallBack> clientMap;
     private int idCounter;
-    CallBack firstClient;
 
 
-    protected BridgeClass(Connection connection) throws RemoteException {
+    BridgeClass(Connection connection) throws RemoteException {
         this.connection = connection;
         clientMap = new HashMap<>();
         idCounter=0;
@@ -30,7 +29,7 @@ public class BridgeClass extends UnicastRemoteObject implements Bridge {
         secondPlayer=null;
     }
 
-    public String getName() throws RemoteException {
+    public String getName() {
         if(firstPlayer==null){
             firstPlayer ="first";
             return firstPlayer;
@@ -39,12 +38,8 @@ public class BridgeClass extends UnicastRemoteObject implements Bridge {
         return secondPlayer;
     }
 
-    public boolean turn(int start, int second, String name) throws RemoteException {
+    public boolean addStick(int start, int second, String name) {
         return gameSession.addStick(start,second,name);
-    }
-
-    public boolean[] getState() throws RemoteException {
-        return gameSession.getStation();
     }
 
     public void addClient(CallBack client) throws RemoteException {
@@ -59,7 +54,7 @@ public class BridgeClass extends UnicastRemoteObject implements Bridge {
     }
 
     @Override
-    public boolean logIn(String name, String password) throws RemoteException {
+    public boolean logIn(String name, String password) {
         String sql = "SELECT * FROM User WHERE NAME = ? AND PASSWORD = ?";
         ResultSet rs =null;
 
@@ -80,10 +75,6 @@ public class BridgeClass extends UnicastRemoteObject implements Bridge {
         return false;
     }
 
-    @Override
-    public void addEdge(int start, int end,String name) {
-        gameSession.addStick(start,end,name);
-    }
 
 
 }

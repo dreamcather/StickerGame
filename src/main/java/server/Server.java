@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Server {
+class Server {
     public static void main(final String[] args) throws IOException, AlreadyBoundException {
         try {
             Class.forName("org.sqlite.JDBC");

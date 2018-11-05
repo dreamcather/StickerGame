@@ -9,7 +9,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
-import server.Bridge;
 import visualGame.VisualStickGame;
 
 import java.rmi.registry.LocateRegistry;
@@ -17,7 +16,6 @@ import java.rmi.registry.Registry;
 import java.util.Optional;
 
 public class ClientGUI extends Application {
-    private Stage window;
     private Scene scene;
     private Pane layout;
     private VisualStickGame visualStickGame;
@@ -69,7 +67,7 @@ public class ClientGUI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        window = primaryStage;
+        Stage window = primaryStage;
         window.setTitle("Game");
         layout = new Pane();
         client = new Client(this);
@@ -83,7 +81,6 @@ public class ClientGUI extends Application {
         Platform.runLater(()->{
         visualStickGame = new VisualStickGame(50, 50, 300, 300, 4, layout,client);
         client.setVisualGame(visualStickGame);
-        visualStickGame.show();
         scene.setOnMouseClicked(visualStickGame::handle);
         });
     }

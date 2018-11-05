@@ -6,12 +6,10 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public interface Bridge extends Remote {
-    final String NAME = "Bridge";
-    public String getName() throws RemoteException;
-    public boolean turn(int start, int second, String name) throws RemoteException;
-    public boolean[] getState() throws RemoteException;
+    String NAME = "Bridge";
+    String getName() throws RemoteException;
     void addClient(CallBack client) throws RemoteException;
     boolean logIn(String name,String password)throws RemoteException;
 
-    void addEdge(int start, int end,String name) throws RemoteException;
+    boolean addStick(int start, int end, String name) throws RemoteException;
 }

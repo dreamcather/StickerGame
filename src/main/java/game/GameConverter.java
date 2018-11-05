@@ -34,14 +34,14 @@ public class GameConverter {
 
     }
 
-    protected int getLeftCell(int stickNumber) {
+    public int getLeftCell(int stickNumber) {
        int number = stickNumber-stickLength*pointLength;
        int row =number%stickLength;
        int column = (int)Math.ceil(number/stickLength);
        return row*stickLength+column-1;
     }
 
-    protected int getRightCell(int stickNumber) {
+    public int getRightCell(int stickNumber) {
         int leftCell = getLeftCell(stickNumber);
         if (leftCell % stickLength == 3)
             return -1;

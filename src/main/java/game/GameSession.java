@@ -5,11 +5,11 @@ import client.CallBack;
 import java.rmi.RemoteException;
 
 public class GameSession implements ReportInterface {
-    CallBack firstPlayer;
-    CallBack secondPlayer;
-    StickGame stickGame;
-    String currentPlayer;
-    boolean extraTurn;
+    private CallBack firstPlayer;
+    private CallBack secondPlayer;
+    private StickGame stickGame;
+    private String currentPlayer;
+    private boolean extraTurn;
 
     public GameSession(int count, CallBack firstPlayer, CallBack secondPlayer) {
         this.firstPlayer = firstPlayer;

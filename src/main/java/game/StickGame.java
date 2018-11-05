@@ -1,6 +1,6 @@
 package game;
 
-public class StickGame {
+class StickGame {
     private int stickLength;
     private int pointLength;
     private int stickSize;
@@ -36,7 +36,7 @@ public class StickGame {
         reportInterface.getExtraTurn();
     }
 
-    protected boolean isClosed(int number) {
+    boolean isClosed(int number) {
         int column = number % stickLength;
         int row = (int) Math.ceil(number / stickLength);
         int upStick = number;
