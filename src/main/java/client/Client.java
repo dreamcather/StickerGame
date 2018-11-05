@@ -18,8 +18,7 @@ public class Client extends UnicastRemoteObject implements CallBack,Serializable
     VisualStickGame visualStickGame;
     ClientGUI clientGUI;
 
-    public Client(Bridge bridge,VisualStickGame visualStickGame,ClientGUI clientGUI) throws RemoteException, MalformedURLException {
-        this.visualStickGame =visualStickGame;
+    public Client(Bridge bridge,ClientGUI clientGUI) throws RemoteException, MalformedURLException {
         this.bridge = bridge;
         this.clientGUI =clientGUI;
         try {

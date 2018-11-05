@@ -1,21 +1,14 @@
 package server;
 
 import client.CallBack;
-import client.CallBackClass;
 import game.GameSession;
-import game.StickGame;
 
-import java.net.MalformedURLException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BridgeClass extends UnicastRemoteObject implements Bridge {

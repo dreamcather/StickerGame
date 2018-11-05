@@ -74,13 +74,10 @@ public class ClientGUI extends Application {
         layout = new Pane();
         Registry reg = LocateRegistry.getRegistry("localhost");
         Bridge bridge = (Bridge) reg.lookup(Bridge.NAME);
-        client = new Client(bridge,visualStickGame,this);
+        client = new Client(bridge,this);
         scene = new Scene(layout, 750, 600);
         window.setScene(scene);
         //registartion();
-        //visualStickGame = new VisualStickGame(50, 50, 300, 300, 4, layout,client);
-        //visualStickGame.show();
-        //scene.setOnMouseClicked(visualStickGame::handle);
         window.show();
     }
 
