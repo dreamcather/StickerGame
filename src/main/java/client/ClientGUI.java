@@ -72,9 +72,7 @@ public class ClientGUI extends Application {
         window = primaryStage;
         window.setTitle("Game");
         layout = new Pane();
-        Registry reg = LocateRegistry.getRegistry("localhost");
-        Bridge bridge = (Bridge) reg.lookup(Bridge.NAME);
-        client = new Client(bridge,this);
+        client = new Client(this);
         scene = new Scene(layout, 750, 600);
         window.setScene(scene);
         //registartion();

@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -18,8 +19,14 @@ public class Client extends UnicastRemoteObject implements CallBack,Serializable
     VisualStickGame visualStickGame;
     ClientGUI clientGUI;
 
-    public Client(Bridge bridge,ClientGUI clientGUI) throws RemoteException, MalformedURLException {
-        this.bridge = bridge;
+    public Client(ClientGUI clientGUI) throws RemoteException, MalformedURLException {
+        Registry reg = LocateRegistry.getRegistry("localhost");
+        bridge = null;
+        try {
+            bridge = (Bridge) reg.lookup(Bridge.NAME);
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        }
         this.clientGUI =clientGUI;
         try {
             name = bridge.getName();
@@ -48,7 +55,6 @@ public class Client extends UnicastRemoteObject implements CallBack,Serializable
         return false;
     }
 
-    @Override
     public void getMessage(String string) throws RemoteException {
 
     }
